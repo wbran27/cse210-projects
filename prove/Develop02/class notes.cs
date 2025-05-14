@@ -1,4 +1,6 @@
 namespace ConsoleApp1;
+using System;
+using System.Collections.Generic;
 
 class Program
 {
