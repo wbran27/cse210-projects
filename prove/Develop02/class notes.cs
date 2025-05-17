@@ -2,20 +2,21 @@ namespace ConsoleApp1;
 using System;
 using System.Collections.Generic;
 
-class Program
+public class Prompts 
 {
-    static void Main()
+    private List<string> items; // Encapsulated list
+
+    // Constructor to initialize the list
+    public Prompts()
     {
-        // Create a list of items
-        List<string> prompts = new List<string> { "Apple", "Banana", "Orange", "Grape", "Mango" };
-
-        // Create a Random object
-        Random random = new Random();
-
-        // Select a random item
-        string randomprompt = prompts[random.Next(prompts.Count)];
-
-        // Display the random item
-        Console.WriteLine($"Randomly selected item: {randomprompt}");
+        items = new List<string> { "Apple", "Banana", "Orange", "Grape", "Mango" };
     }
+
+    // Method to get a random item
+    public string GetRandomItem()
+    {
+        Random random = new Random();
+        return items[random.Next(items.Count)];
+    }
+
 }
