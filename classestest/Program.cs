@@ -14,10 +14,11 @@ class Program
         human1.age = 65;
         human1.eat();
         human1.sleep();
+        
         //make a new human using the same class
         Human human2 = new Human();
         human2.name = "Hank";
-        human2.age = 65;
+        human2.age = 25;
         human2.eat();
         human2.sleep();
     }
