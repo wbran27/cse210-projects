@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 public class JournalEntry
 {
@@ -6,6 +7,14 @@ public class JournalEntry
     private string _response;
     private DateTime _date;
 
+    public JournalEntry(string prompt, string response, DateTime date)
+    {
+        _prompt = prompt;
+        _response = response;
+        _date = date;
+    }
+
+    // new entries
     public JournalEntry(string prompt, string response)
     {
         _prompt = prompt;
@@ -35,7 +44,20 @@ public class JournalEntry
         Console.WriteLine($"Response: {_response}");
         Console.WriteLine();
     }
+
+    public string GetSaveFormat()
+    {
+        return $"{_date}|{_prompt}|{_response}";
+    }
+
+    public static JournalEntry FromSaveFormat(string line)
+    {
+        string[] parts = line.Split('|');
+        DateTime date = DateTime.Parse(parts[0]);
+        return new JournalEntry(parts[1], parts[2], date);
+    }
 }
+
 
 public class Journal
 {
@@ -60,4 +82,36 @@ public class Journal
             entry.Display();
         }
     }
+
+
+    public void SaveToFile(string filename)
+    {
+        using (StreamWriter writer = new StreamWriter(filename))
+        {
+            foreach (JournalEntry entry in _entries)
+            {
+                writer.WriteLine(entry.GetSaveFormat());
+            }
+        }
+    }
+
+    public void LoadFromFile(string filename)
+    {
+        if (File.Exists(filename))
+        {
+            _entries.Clear();
+            string[] lines = File.ReadAllLines(filename);
+            foreach (string line in lines)
+            {
+                JournalEntry entry = JournalEntry.FromSaveFormat(line);
+                _entries.Add(entry);
+            }
+        }
+        else
+        {
+            Console.WriteLine("File not found.");
+        }
+    }
+
+
 }

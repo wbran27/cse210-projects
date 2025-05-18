@@ -10,7 +10,7 @@ class Program
         Prompts promptsObj = new Prompts();
         //intance of journals
         Journal journal = new Journal();
-        
+
         while (choice != 5)
         {
             Console.WriteLine("Please select one of the following chioces:");
@@ -37,15 +37,15 @@ class Program
                 }
                 else if (choice == 3)
                 {
-                    // Load the journal from a file
-                    Console.WriteLine("You chose: Load");
-                    // Add your logic here
+                    Console.Write("Enter filename to load from: ");
+                    string filename = Console.ReadLine();
+                    journal.LoadFromFile(filename);
                 }
                 else if (choice == 4)
                 {
-                    // Save the journal to a file
-                    Console.WriteLine("You chose: Save");
-                    // Add your logic here
+                    Console.Write("Enter filename to save to: ");
+                    string filename = Console.ReadLine();
+                    journal.SaveToFile(filename);
                 }
                 else if (choice == 5)
                 {
